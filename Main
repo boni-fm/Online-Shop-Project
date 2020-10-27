@@ -1,0 +1,740 @@
+package project_001;
+
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        pembeli();
+        mainMenu();
+    }
+    
+    //Pembeli Only!!!!
+    //DATANYA DULU LURRRRRRR
+    static Pembeli pembeli = new Pembeli();
+    //EXKLUSIF MLG PRO 420
+    static void pembeli() {
+        Scanner in = new Scanner(System.in);
+        
+        //data pribadi
+        System.out.print("Nama    : ");
+        pembeli.setNamaPembeli(in.next());
+        System.out.print("No.Telp : ");
+        pembeli.setNoTelp(in.next());
+        
+        //data alamat
+        System.out.print("Nama jalan     : ");
+        pembeli.setNamaJalan(in.next());
+        System.out.print("Kota rumah     : ");
+        pembeli.setKotaRumah(in.next());
+        System.out.print("Nomor rumah    : ");
+        pembeli.setNomorRumah(in.nextInt());
+        System.out.print("Kode pos       : ");
+        pembeli.setKodePos(in.nextInt());
+        System.out.println("----------------------------------");
+        System.out.println();
+    }
+    
+    
+    //WOOOOOO PENJUAL DAN PEMBELIANN WOOOOOOO XDDDDDDD
+    //data toko 
+    static Toko dataToko = new Toko("Toko Kompyuta III", 1043);
+    
+    //list barang yang dijual  :  
+    // - Laptop
+    static Barang[] listLaptop = new Barang[2];
+    static void listLaptop() {
+        //list laptop yang dijual
+        listLaptop[0] = new Barang("ASUS VivoBook S14 S433FL", 1, 13500000, 2);
+        listLaptop[1] = new Barang("ASUS ROG Strix G531GD", 1, 12800000, 3);
+        
+        //menampilkan data laptop
+        System.out.println(listLaptop[0].getNamaBarang()+" | "+listLaptop[0].getHarga());
+        System.out.println(listLaptop[1].getNamaBarang()+" | "+listLaptop[1].getHarga());
+    }
+    
+    // - Komputer
+    static Barang[] listKomputer = new Barang[2];
+    static void listKomputer() {
+        //list komputer yang dijual
+        listKomputer[0] = new Barang("MSI NightBlade", 2, 11000000, 6);
+        listKomputer[1] = new Barang("ACER Veriton ES2730", 2, 8000000, 5);
+        
+        //menampilkan data komputer
+        System.out.println(listKomputer[0].getNamaBarang()+" | "+listKomputer[0].getHarga());
+        System.out.println(listKomputer[1].getNamaBarang()+" | "+listKomputer[1].getHarga());
+    }
+    
+    // -  Aksesoris
+    static Barang[] listAksesoris = new Barang[3];
+    static void listAksesoris() {
+        listAksesoris[0] = new Barang("Mouse – Corsair Vengeance M65", 3, 800000, 1);
+        listAksesoris[1] = new Barang("Keyboard – SteelSeries Apex", 3, 900000, 3);
+        listAksesoris[2] = new Barang("Headset - Fantech CAPTAIN 7.1", 3, 250000, 1);
+        
+        //menampilkan data aksesoris
+        System.out.println(listAksesoris[0].getNamaBarang()+" | "+listAksesoris[0].getHarga());
+        System.out.println(listAksesoris[1].getNamaBarang()+" | "+listAksesoris[1].getHarga());
+        System.out.println(listAksesoris[2].getNamaBarang()+" | "+listAksesoris[2].getHarga());
+    }
+    
+    
+    //Array Shopping Cart dan jumlah barang yang dibeli
+    // - Array cart tiap barang
+    static Barang[] laptopCart = new Barang[1];
+    static Barang[] komputerCart = new Barang[1];
+    static Barang[] aksesorisCart = new Barang[1];
+            
+    // - jumlah barang di cart
+    static int jumlahLaptop = 0;
+    static int jumlahKomputer = 0;
+    static int jumlahAksesoris = 0;
+    
+    
+    //Keranjang Belanja/shopping cart
+    // - obyek keranjang
+    static KeranjangBelanja keranjang = new KeranjangBelanja(laptopCart, komputerCart, aksesorisCart);
+    
+    //tampil keranjang
+    static void shoppingCart() {
+        
+        if (jumlahAksesoris == 1 || jumlahKomputer == 1
+                || jumlahLaptop == 1) {
+            if (jumlahLaptop == 0) {
+                laptopCart[0] = new Barang(null, 0, 0, 0);
+            }
+            if (jumlahKomputer == 0) {
+                komputerCart[0] = new Barang(null, 0, 0, 0);
+            }
+            if (jumlahAksesoris == 0) {
+                aksesorisCart[0] = new Barang(null, 0, 0, 0);
+            }
+        }
+            System.out.println("=============================================");
+            System.out.println("---------------------------------------------");
+            System.out.println("\t\tShopping Cart");
+            System.out.println("---------------------------------------------");
+            System.out.println("=============================================");
+            
+            System.out.println("Keranjang Laptop");
+            if(jumlahLaptop >= 1) {
+                for (int i = 0; i < laptopCart.length; i++) {
+                    System.out.println((i+1)+". "+laptopCart[i].getNamaBarang()+", "+laptopCart[i].getHarga());
+                }
+            }
+            System.out.println();
+            System.out.println("Keranjang Komputer");
+            if(jumlahKomputer >= 1) {
+                for (int i = 0; i < komputerCart.length; i++) {
+                    System.out.println((i+1)+". "+komputerCart[i].getNamaBarang()+", "+komputerCart[i].getHarga());
+                }
+            }
+            System.out.println();
+            System.out.println("Keranjang Aksesoris");
+            if(jumlahAksesoris >= 1) {
+                for (int i = 0; i < aksesorisCart.length; i++) {
+                    System.out.println((i+1)+". "+aksesorisCart[i].getNamaBarang()+", "+aksesorisCart[i].getHarga());
+                }
+            }
+            System.out.println("---------------------------------------------");
+    }   
+
+    
+    //Menu-menu di program
+    // - Main Menu
+    static void mainMenu() {
+        Scanner in = new Scanner(System.in);
+        int pilihan = 0;
+        shoppingCart();
+        
+        System.out.println();
+        System.out.println("========================================");
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        //pilihan menu
+        System.out.println("\t\tMain Menu");
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        System.out.println("========================================");
+        System.out.println("1. List Laptop");
+        System.out.println("2. List Komputer");
+        System.out.println("3. List Aksesoris");
+        System.out.println("4. Delete Item");
+        System.out.println("5. Struk Pembayaran");
+        System.out.println("6. EXIT");
+        System.out.println("========================================");
+        System.out.print("Pilihan  ?  ");
+        pilihan = in.nextInt();
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        System.out.println("========================================");
+        
+        switch(pilihan) {
+                case 1 : 
+                    System.out.println();
+                    laptopMenu();
+                    break;
+                case 2 : 
+                    System.out.println();
+                    komputerMenu();
+                    break;
+                case 3 : 
+                    System.out.println();
+                    aksesorisMenu();
+                    break;
+                case 4 : 
+                    System.out.println();
+                    generalRemove();
+                    break;
+                case 5 : 
+                    System.out.println();
+                    menuKurir();
+                    break;
+                default : 
+                    System.out.println("Babay <3");
+                    break;
+                    
+        }
+
+    }
+    
+    // Menu adding barang dan remove barang LMAO
+    // -+ Menu adding Laptop
+    static void laptopMenu() {
+        Scanner in = new Scanner(System.in);
+        int pilihan = 0;
+        
+        //list laptop ditampilin
+        System.out.println("--------------------------------------");
+        listLaptop();
+        System.out.println("--------------------------------------");
+        System.out.println("Menu");
+        System.out.println("9. Back");
+        System.out.print("Pilihan ? ");
+        pilihan = in.nextInt();
+        System.out.println();
+        
+        //sistem pilihannya
+        if(pilihan == 1) {
+            Barang barang = listLaptop[0];
+            
+            if(jumlahLaptop == 0) {
+                laptopCart[0] = barang;
+                jumlahLaptop += 1;
+                mainMenu();
+            }
+            else {
+                laptopCart = addBarang(jumlahLaptop, laptopCart, barang);
+                jumlahLaptop += 1;
+                keranjang.setArrLaptop(laptopCart);
+                mainMenu();
+            }
+            
+        }
+        else if(pilihan == 2) {
+            Barang barang = listLaptop[1];
+            
+            if(jumlahLaptop == 0) {
+                laptopCart[1] = barang;
+                jumlahLaptop += 1;
+                mainMenu();
+            }
+            else {
+                laptopCart = addBarang(jumlahLaptop, laptopCart, barang);
+                jumlahLaptop += 1;
+                keranjang.setArrLaptop(laptopCart);
+                mainMenu();
+            }
+        }
+        else if(pilihan == 9) {
+            mainMenu();
+        }
+        
+    }
+    
+    // -+ Menu adding Komputer
+    static void komputerMenu() {
+        Scanner in = new Scanner(System.in);
+        int pilihan = 0;
+        
+        //list komputer ditampilin
+        System.out.println("--------------------------------------");
+        listKomputer();
+        System.out.println("--------------------------------------");
+        System.out.println("Menu");
+        System.out.println("9. Back");
+        System.out.print("Pilihan ? ");
+        pilihan = in.nextInt();
+        System.out.println();
+        
+        //sistem pilihannya
+        if(pilihan == 1) {
+            Barang barang = listKomputer[0];
+            
+            if(jumlahKomputer == 0) {
+                komputerCart[0] = barang;
+                jumlahKomputer += 1;
+                mainMenu();
+            }
+            else {
+                komputerCart = addBarang(jumlahKomputer, komputerCart, barang);
+                jumlahKomputer += 1;
+                keranjang.setArrKomputer(komputerCart);
+                mainMenu();
+            }
+        }
+        else if(pilihan == 2) {
+            Barang barang = listKomputer[1];
+            
+            if(jumlahKomputer == 0) {
+                komputerCart[0] = barang;
+                jumlahKomputer += 1;
+                mainMenu();
+            }
+            else {
+                komputerCart = addBarang(jumlahKomputer, komputerCart, barang);
+                jumlahKomputer += 1;
+                keranjang.setArrKomputer(komputerCart);
+                mainMenu();
+            }
+        }
+        else if(pilihan == 9) {
+            mainMenu();
+        }
+        
+    }
+
+    // -+ Menu adding Aksesoris
+    static void aksesorisMenu() {
+        Scanner in = new Scanner(System.in);
+        int pilihan = 0;
+        
+        //list aksesoris ditampilin
+        System.out.println("--------------------------------------");
+        listAksesoris();
+        System.out.println("--------------------------------------");
+        System.out.println("Menu");
+        System.out.println("9. Back");
+        System.out.print("Pilihan ? ");
+        pilihan = in.nextInt();
+        System.out.println();
+        
+        //sistem pilihannya
+        if(pilihan == 1) {
+            Barang barang = listAksesoris[0];
+            
+            if(jumlahAksesoris == 0) {
+                aksesorisCart[0] = barang;
+                jumlahAksesoris += 1;
+                mainMenu();
+            }
+            else {
+                aksesorisCart = addBarang(jumlahAksesoris, aksesorisCart, barang);
+                jumlahAksesoris += 1;
+                keranjang.setArrAksesoris(aksesorisCart);
+                mainMenu();
+            }
+            
+        }
+        else if(pilihan == 2) {
+            Barang barang = listAksesoris[1];
+            
+            if(jumlahAksesoris == 0) {
+                aksesorisCart[0] = barang;
+                jumlahAksesoris += 1;
+                mainMenu();
+            }
+            else {
+                aksesorisCart = addBarang(jumlahAksesoris, aksesorisCart, barang);
+                jumlahAksesoris += 1;
+                keranjang.setArrAksesoris(aksesorisCart);
+                mainMenu();
+            }
+        }
+        else if(pilihan == 3) {
+            Barang barang = listAksesoris[2];
+            
+            if(jumlahAksesoris == 0) {
+                aksesorisCart[0] = barang;
+                jumlahAksesoris += 1;
+                mainMenu();
+            }
+            else {
+                aksesorisCart = addBarang(jumlahAksesoris, aksesorisCart, barang);
+                jumlahAksesoris += 1;
+                keranjang.setArrAksesoris(aksesorisCart);
+                mainMenu();
+            }
+        }
+        else if(pilihan == 9) {
+            mainMenu();
+        }
+        
+    }
+    
+    //Menu remove in general
+    static void generalRemove() {
+        Scanner in = new Scanner(System.in);
+        String pilihan;
+        int index;
+        
+        System.out.println("----------------------------------");
+        shoppingCart();
+        System.out.println("----------------------------------");
+        
+        System.out.println("Barang yang ingin dihapus : ");
+        System.out.println("a. Laptop/b. Komputer/c. Aksesoris");
+        pilihan = in.next();
+        System.out.println("----------------------------------");
+        
+        
+        if (pilihan.equals("a")) {
+            System.out.println("Barang yang ingin dihapus ? ");
+            index = in.nextInt();
+        
+            if(laptopCart.length == 1) {
+                Barang temp = new Barang();
+                laptopCart[0] = temp;
+            }
+            else {
+                laptopCart = removeBarang(laptopCart, (index-1));
+            }
+            jumlahLaptop -= 1;
+        }
+        else if (pilihan.equals("b")) {
+            System.out.println("Barang yang ingin dihapus ? ");
+            index = in.nextInt();
+        
+            if(komputerCart.length == 1) {
+                Barang temp = new Barang();
+                komputerCart[0] = temp;
+            }
+            else {
+                komputerCart = removeBarang(komputerCart, (index-1));
+            }
+            jumlahKomputer -= 1;
+        }
+        else if (pilihan.equals("c")) {
+            System.out.println("Barang yang ingin dihapus ? ");
+            index = in.nextInt();
+        
+            if(aksesorisCart.length == 1) {
+                Barang temp = new Barang();
+                aksesorisCart[0] = temp;
+            }
+            else {
+                aksesorisCart = removeBarang(aksesorisCart, (index-1));
+            }
+            jumlahAksesoris -= 1;
+        }
+        System.out.println("=-=Item Removed=-=");
+        System.out.println();
+        mainMenu();
+    }
+
+    
+    //Menu menuju pembayaran
+    // shopping cart
+    static void strukPembayaran() {
+        int n = 1;
+        System.out.println();
+        System.out.println("\t\t\tLIST BELANJA");
+        System.out.println("-----------------------------------------------------------");
+        //menampilkan keranjang laptop
+        if(jumlahLaptop >= 1) {
+            for (int i = 0; i < laptopCart.length; i++) {
+                System.out.println((n++)+". "+laptopCart[i].getNamaBarang()+", "+laptopCart[i].getHarga());
+            }
+        }
+        
+        //menampilkan keranjang komputer
+        if(jumlahKomputer >= 1) {
+            for (int i = 0; i < komputerCart.length; i++) {
+                System.out.println((n++)+". "+komputerCart[i].getNamaBarang()+", "+komputerCart[i].getHarga());
+            }
+        }
+        
+        //menampilkan keranjang aksesoris
+        if(jumlahAksesoris >= 1) {
+            for (int i = 0; i < aksesorisCart.length; i++) {
+                System.out.println((n++)+". "+aksesorisCart[i].getNamaBarang()+", "+aksesorisCart[i].getHarga());
+            }
+        }
+        
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("TOTAL HARGA            = "+keranjang.totalHarga());
+        System.out.println("TOTAL BERAT BARANG     = "+keranjang.totalBerat());
+    }
+    
+    // - menu kurir
+    static void menuKurir() {
+        Scanner in = new Scanner(System.in);
+        int pilihan;
+        
+        strukPembayaran();
+        
+        System.out.println();
+        System.out.println("Jenis Kurir : ");
+        System.out.println("1. JNE ");
+        System.out.println("2. TIKI ");
+        System.out.print("Pilihan  ?  ");
+        pilihan = in.nextInt();
+        System.out.println();
+        
+        if (pilihan == 1) {
+            jne();
+        }
+        else if (pilihan == 2) {
+            tiki();
+        }
+        else 
+            menuKurir();
+        
+    }
+    
+    //Bagian Kurir (jne dan tiki)
+    static String kurir;
+    // - JNE
+    static Kurir jne = new Jne();
+    static void jne() {
+        Scanner in = new Scanner(System.in);
+        int pilihan;
+        kurir = "JNE";
+        
+        //membuat obyek jne
+        Jne kurirJne = (Jne)jne;
+        
+        //data jne
+        kurirJne.setNama("JNE");
+        kurirJne.setNoTelp(29278888);
+        kurirJne.setBeratBarang(keranjang.totalBerat());
+        
+        //informasi REG
+        System.out.println("1. REG");
+        kurirJne.descReg();
+        System.out.println("------------------------------");
+        System.out.println("Biaya pengiriman = "+kurirJne.hargaREG());
+        System.out.println();
+        
+        //informasi Special
+        System.out.println("2. Special");
+        kurirJne.descSpecial();
+        System.out.println("------------------------------");
+        System.out.println("Biaya pengiriman = "+kurirJne.hargaSpecial());
+        System.out.println();
+        
+        //memilih kurir 
+        System.out.print("Pilihan : ");
+        pilihan = in.nextInt();
+        System.out.println();
+        
+        //sistem pilihan
+        if (pilihan == 1) {
+            kurirJne.paketPilihan(1);
+            hargaTotal = kurirJne.getHarga() + keranjang.totalHarga();
+            menuPembayaran();
+        }
+        else if (pilihan == 2) {
+            kurirJne.paketPilihan(2);
+            hargaTotal = kurirJne.getHarga() + keranjang.totalHarga();
+            menuPembayaran();
+        }
+        else
+            jne();
+    }
+    
+    // - Tiki
+    static Kurir tiki = new Tiki();
+    static void tiki() {
+        Scanner in = new Scanner(System.in);
+        int pilihan;
+        kurir = "TIKI";
+        
+        //membuat obyek tiki
+        Tiki kurirTiki = (Tiki)tiki;
+        
+        //data tiki
+        kurirTiki.setNama("JNE");
+        kurirTiki.setNoTelp(29278888);
+        kurirTiki.setBeratBarang(keranjang.totalBerat());
+        
+        //informasi eko
+        System.out.println("1. EKO");
+        kurirTiki.descEko();
+        System.out.println("------------------------------");
+        System.out.println("Biaya pengiriman = "+kurirTiki.hargaEko());
+        System.out.println();
+        
+        //informasi OverNight
+        System.out.println("2. OverNight");
+        kurirTiki.descOverNight();
+        System.out.println("------------------------------");
+        System.out.println("Biaya pengiriman = "+kurirTiki.hargaOverNight());
+        System.out.println();
+        
+        //memilih kurir 
+        System.out.print("Pilihan : ");
+        pilihan = in.nextInt();
+        System.out.println();
+        
+        //sistem pilihan
+        if (pilihan == 1) {
+            kurirTiki.paketPilihan(1);
+            hargaTotal = kurirTiki.getHarga() + keranjang.totalHarga();
+            menuPembayaran();
+        }
+        else if (pilihan == 2) {
+            kurirTiki.paketPilihan(2);
+            hargaTotal = kurirTiki.getHarga() + keranjang.totalHarga();
+            menuPembayaran();
+        }
+        else
+            tiki();
+    }
+    
+    
+    //Cara Pembayaran
+    static String kodePembayaran;
+    static int hargaTotal;
+    //Menu cara pembayaran
+    static void menuPembayaran() {
+        Scanner in = new Scanner(System.in);
+        int pilihan;
+        
+        System.out.println("------------------------------");
+        System.out.println("Total Harga = "+hargaTotal);
+        System.out.println("------------------------------");
+        System.out.println("Cara Pembayaran : ");
+        System.out.println("1. OVO");
+        System.out.println("2. Gopay");
+        System.out.println("3. Indomaret");
+        System.out.print("Pilihan ? ");
+        pilihan = in.nextInt();
+        
+        switch(pilihan) {
+            case 1 :
+                ovo();
+                break;
+            case 2 :
+                gopay();
+                break;
+            case 3 : 
+                indomaret();
+                break;
+            default :
+                menuPembayaran();
+                break;
+        }
+    }
+    
+    //ovo
+    static void ovo() {
+        //siapin pembayaran
+        Ovo ovo = new Ovo();
+        ovo.setNoTelp(pembeli.getNoTelp());
+        kodePembayaran = ovo.getKodePembayaran();
+        
+        //last stand after 3 glass of coffee mate
+        tampilanAkhir();
+        System.out.println("HARGA SEMUA     = "+hargaTotal);
+        System.out.println("Kode Pembayaran = "+kodePembayaran);
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        ovo.CaraPembayaran();
+        
+    }
+    //gopay
+    static void gopay() {
+        //siapin pembayaran
+        Gopay gopay = new Gopay();
+        gopay.setNoTelp(pembeli.getNoTelp());
+        kodePembayaran = gopay.getKodePembayaran();
+        
+        //last stand after 3 glass of coffee mate
+        tampilanAkhir();
+        System.out.println("HARGA SEMUA     = "+hargaTotal);
+        System.out.println("Kode Pembayaran = "+kodePembayaran);
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        gopay.CaraPembayaran();
+    }
+    
+    //indomaret
+    static void indomaret() {
+        //siapin pembayaran
+        Indomaret indo = new Indomaret();
+        indo.setNoTelp(pembeli.getNoTelp());
+        kodePembayaran = indo.getKodePembayaran();
+        
+        //last stand after 3 glass of coffee mate
+        tampilanAkhir();
+        System.out.println("HARGA SEMUA     = "+hargaTotal);
+        System.out.println("Kode Pembayaran = "+kodePembayaran);
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        indo.CaraPembayaran();
+    }
+     
+    //struk akhir
+    static void tampilanAkhir() {
+        String jenisPaket;
+        int hargaPaket;
+        if(kurir.equals("JNE")) {
+            Jne kurirJne = (Jne)jne;
+            jenisPaket = kurirJne.getJenis();
+            hargaPaket = kurirJne.getHarga();
+        }
+        else {
+            Tiki kurirTiki = (Tiki)tiki;
+            jenisPaket = kurirTiki.getJenis();
+            hargaPaket = kurirTiki.getHarga();
+        }
+            
+        System.out.println("\t\t   "+dataToko.getNamaToko()+" | "+dataToko.getIdToko());
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("Pembeli  = "+pembeli.getNamaPembeli());
+        System.out.println("Alamat   = "+pembeli.getNamaJalan()+", "+pembeli.getKotaRumah());
+        System.out.println("Kode Pos = "+pembeli.getKodePos());
+        System.out.println("No.Telp  = "+pembeli.getNoTelp());
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");;
+        strukPembayaran();
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("\t\t\t"+kurir);
+        System.out.println("Jenis Paket = "+jenisPaket);
+        System.out.println("Harga Paket = "+hargaPaket);
+        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+    }
+            
+    //insert and delete cart array data
+    // - insert/add
+    static Barang[] addBarang(int n, Barang arr[], Barang x) 
+    { 
+        Barang newarr[] = new Barang[n + 1]; 
+
+        if(arr.length == 1) {
+            newarr[0] = arr[0];
+        }
+        else {
+            for (int i = 0; i < arr.length; i++) 
+            newarr[i] = arr[i];
+        }
+        
+        newarr[n] = x; 
+  
+        return newarr; 
+    }
+    // - delete/remove 
+    static Barang[] removeBarang(Barang[] arr, int index) {
+        if (arr == null
+            || index < 0
+            || index >= arr.length) { 
+  
+            return arr; 
+        } 
+        Barang[] anotherArray = new Barang[arr.length - 1]; 
+  
+        for (int i = 0, k = 0; i < arr.length; i++) { 
+  
+            if (i == index) { 
+                continue; 
+            } 
+            anotherArray[k++] = arr[i]; 
+        } 
+  
+        return anotherArray; 
+    }
+}
